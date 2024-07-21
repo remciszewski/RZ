@@ -1,0 +1,25 @@
+<div class="container my-5">
+    <h1 class="mb-3">Zadania</h1>
+
+    <table class="table" *ngIf="tasks && tasks.length > 0">
+        <thead>
+            <tr>
+                <th>Zadanie</th>
+                <th>Rodzaj</th>
+                <th>Priorytet</th>
+                <th>Data od</th>
+                <th>Data do</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let task of tasks">
+                <td>{{ task.zadanie }}</td>
+                <td>{{ task.rodzaj }}</td>
+                <td>{{ task.priorytet }}</td>
+                <td>{{ formatDate(task.dataOd) }}</td>
+                <td>{{ formatDate(task.dataDo) }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p *ngIf="!tasks || tasks.length <= 0">Brak zadań</p>
+</div>
