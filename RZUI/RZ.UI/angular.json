@@ -45,14 +45,6 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputPath": "docs",
-              "baseHref": "/RZ/",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.production.ts"
-                }
-              ],
               "outputHashing": "all"
             },
             "development": {
@@ -103,9 +95,6 @@
             ],
             "scripts": []
           }
-        },
-        "deploy": {
-          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
