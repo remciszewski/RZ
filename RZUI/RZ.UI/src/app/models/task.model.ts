@@ -3,7 +3,9 @@ export interface task {
     zadanie: string;
     rodzaj: string;
     priorytet: string;
-    opis: string;
+    opis?: string;
     dataOd: Date;
     dataDo: Date;
+    status: string;
+    powod: string;
 }

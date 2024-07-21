@@ -1,25 +1,70 @@
 <div class="container my-5">
-    <h1 class="mb-3">Zadania</h1>
+  <h1 class="mb-3">Zadania</h1>
 
-    <table class="table" *ngIf="tasks && tasks.length > 0">
+  <form [formGroup]="searchForm" class="mb-3">
+    <div class="row">
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Priorytet"
+          formControlName="priorytet"
+        />
+      </div>
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Rodzaj"
+          formControlName="rodzaj"
+        />
+      </div>
+      <div class="col">
+        <input
+          type="date"
+          class="form-control"
+          placeholder="Data od"
+          formControlName="dataOd"
+        />
+      </div>
+      <div class="col">
+        <input
+          type="date"
+          class="form-control"
+          placeholder="Data do"
+          formControlName="dataDo"
+        />
+      </div>
+    </div>
+  </form>
+
+  <ng-container *ngIf="filteredTasks$ | async as tasks">
+    <ng-container *ngIf="tasks.length > 0; else noTasks">
+      <table class="table">
         <thead>
-            <tr>
-                <th>Zadanie</th>
-                <th>Rodzaj</th>
-                <th>Priorytet</th>
-                <th>Data od</th>
-                <th>Data do</th>
-            </tr>
+          <tr>
+            <th>Zadanie</th>
+            <th>Rodzaj</th>
+            <th>Priorytet</th>
+            <th>Data od</th>
+            <th>Data do</th>
+            <th>Status</th>
+          </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let task of tasks">
-                <td>{{ task.zadanie }}</td>
-                <td>{{ task.rodzaj }}</td>
-                <td>{{ task.priorytet }}</td>
-                <td>{{ formatDate(task.dataOd) }}</td>
-                <td>{{ formatDate(task.dataDo) }}</td>
-            </tr>
+          <tr *ngFor="let task of tasks; let i = index">
+            <td><a [routerLink]="['/tasks', 'edit', task.id]">{{ task.zadanie }}</a></td>
+            <td>{{ task.rodzaj }}</td>
+            <td>{{ task.priorytet }}</td>
+            <td>{{ task.dataOd | date: 'dd-MM-yyyy' }}</td>
+            <td>{{ task.dataDo | date: 'dd-MM-yyyy' }}</td>
+            <td>{{ task.status }}</td>
+          </tr>
         </tbody>
-    </table>
-    <p *ngIf="!tasks || tasks.length <= 0">Brak zadań</p>
+      </table>
+    </ng-container>
+    <ng-template #noTasks>
+      <p>Brak zadań</p>
+    </ng-template>
+  </ng-container>
 </div>

@@ -1,0 +1,50 @@
+<div class="container my-5">
+  <h1 class="mb-3">Dodaj nowe zadanie</h1>
+
+  <div class="row">
+    <div class="col-6">
+      <form (ngSubmit)="onFormSubmit()" [formGroup]="taskForm">
+        <div class="form-group">
+          <label for="zadanie">Nazwa</label>
+          <input
+            type="text"
+            class="form-control"
+            id="zadanie"
+            placeholder="Wpisz nazwę zadania"
+            required
+            formControlName="zadanie"
+          />
+        </div>
+        <div class="form-group">
+          <label for="type">Rodzaj zadania</label>
+          <select class="form-control" id="type" required formControlName="rodzaj">
+            <option value="">Wybierz rodzaj zadania</option>
+            <option value="Rodzaj 1">Rodzaj 1</option>
+            <option value="Rodzaj 2">Rodzaj 2</option>
+            <option value="Rodzaj 3">Rodzaj 3</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="priority">Priorytet</label>
+          <select class="form-control" id="priority" required formControlName="priorytet">
+            <option value="">Wybierz priorytet</option>
+            <option value="Wysoki">Wysoki</option>
+            <option value="Niski">Niski</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="description">Opis</label>
+          <textarea
+            class="form-control"
+            id="description"
+            placeholder="Wpisz opis zadania"
+            rows="3"
+            maxlength="200"
+            formControlName="opis"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Dodaj</button>
+      </form>
+    </div>
+  </div>
+</div>

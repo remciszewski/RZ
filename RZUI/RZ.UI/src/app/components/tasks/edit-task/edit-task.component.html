@@ -1,0 +1,93 @@
+<div class="container my-5">
+  <h1 class="mb-3">Edytuj zadanie</h1>
+
+  <div class="row">
+    <div class="col-6">
+      <form [formGroup]="taskForm" (ngSubmit)="onFormSubmit()">
+        <div class="form-group">
+          <label for="zadanie">Nazwa</label>
+          <input
+            type="text"
+            class="form-control"
+            id="zadanie"
+            placeholder="Wpisz nazwę zadania"
+            formControlName="zadanie"
+          />
+        </div>
+        <div class="form-group">
+          <label for="type">Rodzaj zadania</label>
+          <select class="form-control" id="type" formControlName="rodzaj">
+            <option value="Rodzaj 1">Rodzaj 1</option>
+            <option value="Rodzaj 2">Rodzaj 2</option>
+            <option value="Rodzaj 3">Rodzaj 3</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="priority">Priorytet</label>
+          <select class="form-control" id="priority" formControlName="priorytet">
+            <option value="Wysoki">Wysoki</option>
+            <option value="Niski">Niski</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="description">Opis</label>
+          <textarea
+            class="form-control"
+            id="description"
+            placeholder="Wpisz opis zadania"
+            rows="3"
+            maxlength="200"
+            formControlName="opis"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="reason">Powód zmiany daty</label>
+          <input
+            type="text"
+            class="form-control"
+            id="reason"
+            placeholder="Wpisz powód zmiany daty"
+            formControlName="powod"
+          />
+        </div>
+        <div class="form-group">
+          <label for="newDueDate">Nowa data zakończenia</label>
+          <select
+            class="form-control"
+            id="newDueDate"
+            formControlName="newDueDate"
+            [disabled]="!taskForm.get('powod')?.value"
+          >
+            <option value="0">Brak</option>
+            <option value="7">+7 dni</option>
+            <option value="14">+14 dni</option>
+            <option value="30">+30 dni</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select class="form-control" id="status" formControlName="status">
+            <option *ngFor="let status of availableStatuses" [value]="status">
+              {{ status }}
+            </option>
+          </select>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary mt-3"
+          [disabled]="taskForm.invalid || taskForm.get('status')?.value === 'Zakończone'"
+        >
+          Zapisz
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger mt-3"
+          (click)="deleteTask(taskDetails.id)"
+          [disabled]="taskForm.get('status')?.value === 'Zakończone'"
+        >
+          Usuń zadanie
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
